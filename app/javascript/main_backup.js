@@ -1,16 +1,11 @@
-    // 현재 이파일은 application.js에 그대로있음
-    
 // 진행중, 완료 탭을 누르면 언더바가 이동한다
 // 완료탭은 완료된것만 진행중은 진행중인 것만
-let taskInput = document.getElementById("text-input");
-let addButton = document.getElementById("add-button");
-let tabs = document.querySelectorAll(".task-tabs a");
 let horizontalMenus = document.querySelectorAll(".task-tabs a");
 let horizontalUnderline = document.getElementById("under-line");
 
 let filterList = [];
 let taskList = [];
-addButton.addEventListener("click", addTask);
+
 
 // 언더라인 구현 관련 로직
 console.log(horizontalMenus);
@@ -91,59 +86,6 @@ function updateHorizontalUnderline() {
   
   }
 
-// 여기서부터 모두, 진행중, 완료 구분 로직 
-for(let i=0; i<tabs.length;i++){
-    tabs[i].addEventListener("click",function(event){filter(event)})
-}
-function filter(event){
-    filterList= [];
-    console.log(" event.target.id:",event.target.id);
-    mode = event.target.id;
-    console.log("filter클릭됨",event.target.id);
-    if(mode == 'all'){
-        console.log("all 필터 조건문 동작");
-        console.log("taskList:", taskList);
-        render();
-    }else if(mode =='ongoing'){
-        console.log("ongoing 필터 조건문 동작")
-        for(let i=0; i<taskList.length; i++){
-            if(taskList[i].isComplete == false  ){
-                filterList.push(taskList[i]);
-            }
-        }
-        render();
-    }else if(mode=="done"){
-        console.log("done 필터 조건문 동작")
-        for(let i=0; i<taskList.length; i++){
-            if(taskList[i].isComplete == true ){
-                filterList.push(taskList[i]);
-            }
-        }
-        render();
-    }
-    console.log("filterList:",filterList);
-}
 
-function addTask() {
-  let task = {
-    //객체 선언: 여러개의 정보를 포함시키고 싶을 경우사용
-    id: randomIDGenerate(),
-    taskContent: taskInput.value,
-    isComplete: false,
-  };
-  taskList.push(task);
-  console.log(taskList);
-  render();
-}
-function render() {
-  let resultHTML = "";
-  let list = [];
-  if (mode =="all"){
-    list = taskList;
-  }else if(mode =="ongoing" || mode =="done"){
-    list = filterList;
-  }
-  
-}
 
 
